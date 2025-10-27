@@ -1,0 +1,39 @@
+services:
+  # Backend service
+  - type: web
+    name: warehouse-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: warehouse-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: warehouse-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: warehouse-db
+          property: password
+    buildCommand: cd backend && mvn clean package -DskipTests
+    startCommand: cd backend && java -jar target/warehouse-management-1.0.0.jar
+
+  # Frontend service
+  - type: web
+    name: warehouse-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://warehouse-backend.onrender.com
+
+# Database service
+databases:
+  - name: warehouse-db
+    plan: free
+    type: mysql
