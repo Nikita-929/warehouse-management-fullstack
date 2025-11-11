@@ -3,10 +3,11 @@ spring:
     name: warehouse-management
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/warehouse_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
-    username: ${DB_USER:root}
+    # Use SPRING_DATASOURCE_URL when provided (production/MySQL). Otherwise fall back to an in-memory H2 for local development.
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:warehouse_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+    username: ${DB_USER:sa}
     password: ${DB_PASSWORD:}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    # Do not hardcode driver-class-name; Spring Boot will auto-detect the driver based on the JDBC URL.
 
   jpa:
     hibernate:
@@ -29,7 +30,8 @@ spring:
   security:
     user:
       name: admin
-      password: admin123
+      # DO NOT hardcode passwords. Provide ADMIN_PASSWORD as an environment variable in production.
+      password: ${ADMIN_PASSWORD:}
 
 server:
   # Render (and many PaaS) provides the assigned port in the PORT env var.

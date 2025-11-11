@@ -1,0 +1,4 @@
+logging:
+  level:
+    "[com.warehouse]": INFO
+    "[org.springframework.security]": WARN
