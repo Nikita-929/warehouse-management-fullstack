@@ -11,16 +11,14 @@ services:
         fromDatabase:
           name: warehouse-db
           property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
+      - key: DB_USER
         fromDatabase:
           name: warehouse-db
           property: user
-      - key: SPRING_DATASOURCE_PASSWORD
+      - key: DB_PASSWORD
         fromDatabase:
           name: warehouse-db
           property: password
-    buildCommand: cd backend && mvn clean package -DskipTests
-    startCommand: cd backend && java -jar target/warehouse-management-1.0.0.jar
 
   # Frontend service
   - type: web
