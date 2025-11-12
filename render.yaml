@@ -19,10 +19,7 @@ services:
     envVars:
       - key: REACT_APP_API_URL
         value: https://warehouse-backend.onrender.com
-
-# Database service
-databases:
-  - name: warehouse-db
-    plan: free
-    # Render managed databases expect a databaseName. Remove the unsupported 'type' field.
-    databaseName: warehouse
+# We are using an external database (e.g. freesqldatabase.com).
+# Do NOT provision a managed Render database for this deployment.
+# Set the production DB credentials in the Render service's Environment → Environment
+# Variables: SPRING_DATASOURCE_URL, DB_USER, DB_PASSWORD, ADMIN_PASSWORD
