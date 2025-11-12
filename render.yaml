@@ -7,18 +7,8 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: warehouse-db
-          property: connectionString
-      - key: DB_USER
-        fromDatabase:
-          name: warehouse-db
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: warehouse-db
-          property: password
+      # NOTE: Using an external database. Set the following environment variables in the Render dashboard (do NOT commit secrets):
+      # SPRING_DATASOURCE_URL, DB_USER, DB_PASSWORD, ADMIN_PASSWORD
 
   # Frontend service
   - type: web
