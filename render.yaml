@@ -36,4 +36,5 @@ services:
 databases:
   - name: warehouse-db
     plan: free
-    type: mysql
+    # Render managed databases expect a databaseName. Remove the unsupported 'type' field.
+    databaseName: warehouse
