@@ -1,6 +1,6 @@
 # Warehouse Management System v2.1
 
-A modern warehouse management system built with **Java Spring Boot** backend and **React** frontend, mirroring the functionality of the original Node.js application.
+A modern warehouse management system built with **Java Spring Boot** backend and **React** frontend.
 
 ## 🚀 Features
 
