@@ -3,7 +3,7 @@ spring:
     name: warehouse-management
 
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslMode=REQUIRED&allowPublicKeyRetrieval=true&useSSL=true
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslMode=REQUIRED&allowPublicKeyRetrieval=true
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,7 +17,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true  # Set to true temporarily for debugging
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
@@ -26,6 +26,7 @@ spring:
   sql:
     init:
       mode: always
+      platform: mysql
 
   session:
     jdbc:
@@ -41,5 +42,3 @@ logging:
   level:
     com.warehouse: DEBUG
     org.springframework.security: DEBUG
-    org.hibernate: DEBUG
-    com.zaxxer.hikari: DEBUG
