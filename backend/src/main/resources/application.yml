@@ -11,8 +11,6 @@ spring:
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
-      data-source-properties:
-        sslMode: REQUIRED
 
   jpa:
     hibernate:
@@ -28,10 +26,11 @@ spring:
       mode: always
       platform: mysql
 
-  session:
-    jdbc:
-      initialize-schema: always
-    timeout: 86400
+  # REMOVE OR COMMENT OUT SESSION CONFIGURATION TEMPORARILY
+  # session:
+  #   jdbc:
+  #     initialize-schema: always
+  #   timeout: 86400
 
 server:
   port: ${PORT:8080}
