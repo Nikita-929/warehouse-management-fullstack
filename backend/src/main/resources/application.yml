@@ -3,11 +3,9 @@ spring:
     name: warehouse-management
 
   datasource:
-    # Use SPRING_DATASOURCE_URL when provided (production/MySQL). Otherwise fall back to an in-memory H2 for local development.
-    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:warehouse_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
-    username: ${DB_USER:sa}
-    password: ${DB_PASSWORD:}
-    # Do not hardcode driver-class-name; Spring Boot will auto-detect the driver based on the JDBC URL.
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslMode=VERIFY_CA&sslCa=aiven-ca.pem
+    username: ${DB_USER}
+    password: ${DB_PASS}
 
   jpa:
     hibernate:
@@ -15,7 +13,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        "[format_sql]": true
+        format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
 
   sql:
@@ -25,22 +23,14 @@ spring:
   session:
     jdbc:
       initialize-schema: always
-    timeout: 86400 # 24 hours
-
-  security:
-    user:
-      name: admin
-      # DO NOT hardcode passwords. Provide ADMIN_PASSWORD as an environment variable in production.
-      password: ${ADMIN_PASSWORD:}
+    timeout: 86400
 
 server:
-  # Render (and many PaaS) provides the assigned port in the PORT env var.
-  # This makes Spring Boot bind to the port Render gives at runtime.
   port: ${PORT:8080}
   servlet:
     context-path: /api
 
 logging:
   level:
-    "[com.warehouse]": DEBUG
-    "[org.springframework.security]": DEBUG
+    com.warehouse: DEBUG
+    org.springframework.security: DEBUG
