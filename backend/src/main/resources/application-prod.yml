@@ -8,6 +8,11 @@ spring:
     init:
       mode: never  # Disable after initial data setup
 
+  session:
+    jdbc:
+      initialize-schema: never  # Add this to prevent session table creation errors
+    store-type: jdbc
+
 logging:
   level:
     "[com.warehouse]": INFO
