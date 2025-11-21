@@ -1,4 +1,16 @@
+spring:
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate  # Safer for production after initial setup
+      
+  sql:
+    init:
+      mode: never  # Disable after initial data setup
+
 logging:
   level:
     "[com.warehouse]": INFO
     "[org.springframework.security]": WARN
+    "[org.hibernate]": WARN
+    "[com.zaxxer.hikari]": INFO
