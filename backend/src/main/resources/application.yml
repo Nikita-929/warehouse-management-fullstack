@@ -3,7 +3,7 @@ spring:
     name: warehouse-management
 
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslMode=VERIFY_CA&useSSL=true&requireSSL=true
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?ssl-mode=VERIFY_CA&ssl-ca=${DB_SSL_CA_PATH}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
