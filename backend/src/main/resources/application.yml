@@ -4,9 +4,9 @@ spring:
 
   datasource:
     # IMPORTANT: URL MUST BE ON ONE LINE, NO LINE BREAKS!
-    url: jdbc:mysql://caboose.proxy.rlwy.net:29855/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root
-    password: YOUR_PASSWORD_HERE  # Make sure no line breaks here either
+    url: jdbc:mysql://${DB_HOST:caboose.proxy.rlwy.net}:${DB_PORT:29855}/${MYSQLDATABASE:railway}?useSSL=false
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
     
     hikari:
