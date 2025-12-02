@@ -14,13 +14,20 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
 
   session:
     store-type: none
 
 logging:
   level:
-    "[com.warehouse]": INFO
-    "[org.springframework.security]": WARN
-    "[org.hibernate]": WARN
-    "[com.zaxxer.hikari]": INFO
+    com.warehouse: INFO
+    org.springframework.security: WARN
+    org.hibernate: WARN
+    com.zaxxer.hikari: INFO
+
+sql:
+  init:
+    mode: never
