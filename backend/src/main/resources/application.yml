@@ -3,14 +3,19 @@ spring:
     name: warehouse-management
 
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    # For Railway - they provide individual environment variables
+    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:warehouse}?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
     
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
+      # Additional Hikari config for Railway
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      minimum-idle: 2
 
   jpa:
     hibernate:
@@ -20,6 +25,8 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
+        jdbc:
+          time_zone: UTC
 
   sql:
     init:
