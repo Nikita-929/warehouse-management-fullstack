@@ -14,11 +14,11 @@ spring:
       minimum-idle: 2
 
   session:
-    store-type: "none"
+    store-type: none
 
   jpa:
     hibernate:
-      ddl-auto: "update"
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -27,9 +27,9 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: "/api"
+    context-path: /api
 
 logging:
   level:
-    com.warehouse: "DEBUG"
-    org.springframework.security: "DEBUG"
+    com.warehouse: DEBUG
+    org.springframework.security: DEBUG
