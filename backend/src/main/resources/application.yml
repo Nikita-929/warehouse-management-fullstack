@@ -3,22 +3,17 @@ spring:
     name: warehouse-management
 
   datasource:
-    # Primary configuration for Railway MySQL
-    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:warehouse}?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    # Use Railway's standard environment variables
+    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:warehouse}?useSSL=true&requireSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: ${MYSQLUSER:root}
     password: ${MYSQLPASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
     
-    # Hikari connection pool configuration
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
       minimum-idle: 2
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      connection-test-query: SELECT 1
 
-  # JPA Configuration
   jpa:
     hibernate:
       ddl-auto: update
@@ -27,49 +22,17 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
-        jdbc:
-          time_zone: UTC
-        connection:
-          provider_disables_autocommit: true
 
-  # SQL initialization
   sql:
     init:
       mode: always
-      platform: mysql
-      continue-on-error: true
-
-  # Session management with JDBC
-  session:
-    jdbc:
-      initialize-schema: always
-      table-name: SPRING_SESSION
-    store-type: jdbc
-    timeout: 3600  # 1 hour session timeout
-
-  # HTTP/2 and compression for better performance
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
 
 server:
   port: ${PORT:8080}
   servlet:
     context-path: /api
-  compression:
-    enabled: true
-    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
-    min-response-size: 1024
 
 logging:
   level:
     com.warehouse: DEBUG
     org.springframework.security: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-  file:
-    name: logs/application.log
