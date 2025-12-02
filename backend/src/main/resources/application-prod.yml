@@ -1,34 +1,17 @@
 spring:
-  datasource:
-    hikari:
-      maximum-pool-size: 15  # Railway allows more connections
-      connection-timeout: 60000
-      validation-timeout: 5000
-      leak-detection-threshold: 60000
-
   jpa:
-    hibernate:
-      ddl-auto: validate  # Safer for production
     show-sql: false
-    properties:
-      hibernate:
-        format_sql: false
-        # Optimizations for production
-        jdbc:
-          batch_size: 20
-          order_inserts: true
-          order_updates: true
-          batch_versioned_data: true
-
+    hibernate:
+      ddl-auto: validate
+      
   sql:
     init:
-      mode: never  # Disable after initial setup
+      mode: never
 
   session:
     jdbc:
-      initialize-schema: never  # Session tables already created
+      initialize-schema: never
     store-type: jdbc
-    timeout: 1800  # 30 minutes for production
 
 logging:
   level:
@@ -36,10 +19,3 @@ logging:
     "[org.springframework.security]": WARN
     "[org.hibernate]": WARN
     "[com.zaxxer.hikari]": INFO
-    "[org.springframework.session]": WARN
-  file:
-    name: /var/log/warehouse/application.log
-  logback:
-    rollingpolicy:
-      max-file-size: 10MB
-      max-history: 30
