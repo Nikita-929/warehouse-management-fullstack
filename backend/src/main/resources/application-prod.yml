@@ -1,14 +1,12 @@
 spring:
-  datasource:
-    hikari:
-      connection-test-query: SELECT 1
-      leak-detection-threshold: 60000
+  session:
+    store-type: none  # Disable session persistence for now
   
   jpa:
+    show-sql: false
     hibernate:
       ddl-auto: validate
-    show-sql: false
-  
+      
   sql:
     init:
       mode: never
@@ -18,3 +16,4 @@ logging:
     "[com.warehouse]": INFO
     "[org.springframework.security]": WARN
     "[org.hibernate]": WARN
+    "[com.zaxxer.hikari]": INFO
