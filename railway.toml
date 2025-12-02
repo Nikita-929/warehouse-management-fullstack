@@ -1,0 +1,8 @@
+[build]
+builder = "heroku/buildpacks:20"
+
+[build.environment]
+JAVA_VERSION = "17"
+
+[deploy]
+startCommand = "java -jar target/*.jar"
